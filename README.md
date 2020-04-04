@@ -4,8 +4,8 @@
   <a href="https://github.com/LA-Shill/FLYBY/blob/master/LICENSE">
     <img alt="License: GNU V3" src="https://img.shields.io/badge/License-GNU_V3-4e73df.svg" target="_blank"/>
   </a>
-  <a href="https://twitter.com/LA-Shill">
-    <img alt="Twitter: LA-Shill" src="https://img.shields.io/twitter/follow/LA-Shill.svg?style=social" target="_blank" />
+  <a href="https://twitter.com/liamshill">
+    <img alt="Twitter: LA-Shill" src="https://img.shields.io/twitter/follow/liamshill.svg?style=social" target="_blank" />
   </a>
 </p>
 <p align="center">
@@ -13,7 +13,7 @@
     <img src="https://i.ibb.co/8KSQSK0/flyby.png" alt="FLYBY">
   </a>
   <p align="center">
-    FLYBY is a open source web based passive reconnaissance and vulnerability assessment platform which utilising scan data from the <a href="https://censys.io/">Censys</a> network to identify known vulnerabilities. All vulnerability data is pulled from the <a href="https://nvd.nist.gov/">National Vulnerability Database (NVD)</a> which is maintained by the U.S. government.
+    FLYBY is a open source web based passive reconnaissance and vulnerability assessment platform which utilises scan data from the <a href="https://censys.io/">Censys</a> network to identify known vulnerabilities. All vulnerability data is pulled from the <a href="https://nvd.nist.gov/">National Vulnerability Database (NVD)</a> which is maintained by the U.S. government.
     </p>
     <p align="center">
       The FLYBY platform has been developed as part of my penultimate year Ethical Hacking mini-project at Abertay University.
@@ -58,10 +58,10 @@ FLYBY comes as both a standalone <strike>command line</strike> application as we
 1. Install and start [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
 
 ```bash
-# Install mongodb
+# Install MongoDB
 sudo apt-get install -y mongodb-org
 
-# Start mongodb service
+# Start MongoDB service
 sudo systemctl start mongod
 ```
 
@@ -96,13 +96,13 @@ sudo systemctl start redis
 
 ```bash
 # Download repo
-git clone https://github.com/LA-Shill/FLYBY.git
+sudo git clone https://github.com/LA-Shill/FLYBY.git
 
 # Access directory
-cd Flyby
+cd FLYBY
 
 # Install dependencies
-pip3 install -r requirements.txt
+sudo pip3 install -r requirements.txt
 ```
 
 ## Usage
@@ -119,19 +119,53 @@ python3 app.py
 ```
 
 3. Navigate to FLYBY in your browser of choice at: [127.0.0.1:5000](http://127.0.0.1:5000)
-<a href="https://twitter.com/LA-Shill">
-  <img alt="Twitter: LA-Shill" src="https://i.ibb.co/dLnM3wc/search.png" target="_blank" />
-</a>
+  <img src="https://i.ibb.co/dLnM3wc/search.png" target="_blank" />
 
-4. Finally add your Censys API key by navigating to the settings tab located at: [127.0.0.1:5000/settings](http://127.0.0.1:5000/settings)
-<a href="https://twitter.com/LA-Shill">
-  <img alt="Twitter: LA-Shill" src="https://i.ibb.co/JpLY6qk/Capture.png" target="_blank" />
-</a>
+4. Finally add your Censys API key and generate the local CPE file by navigating to the settings tab located at: [127.0.0.1:5000/settings](http://127.0.0.1:5000/settings)
+  <img src="https://i.ibb.co/JpLY6qk/Capture.png" target="_blank" />
 
 5. 🛩️🧨 Happy scanning! 💥️🦠
 
 ### Features
-Working on it  . . .
+
+##### Network Scanning
+  <img src="https://i.ibb.co/ggVHXZt/scan.png" target="_blank" />
+  *Currently only supports Censys (HTTP, HTTPS, FTP, SSH and SMTP)
+
+##### Network Scan Results
+  <img src="https://i.ibb.co/jRYZTsb/results.png" target="_blank" />
+
+##### Vulnerability Scanning
+  <img src="https://i.ibb.co/9Hv0rtB/vulscan.png" target="_blank" />
+
+##### Vulnerability Scan Results
+  ###### Overview
+  <img src="https://i.ibb.co/jZFvxS3/vul.png" target="_blank" />
+  <br>
+
+  ###### IP Range Result Breakdown
+  <img src="https://i.ibb.co/7yMf8N5/results-2.png" target="_blank" />
+  <br>
+
+  ###### IP Range Statistical Overview
+  <img src="https://i.ibb.co/BtQy5Ft/Capture.png" target="_blank" />
+
+##### Settings & Platform Status
+  <img src="https://i.ibb.co/ZWtsH63/settings.png" target="_blank" />
+
+
+
+
+
+##### Future Features (TODO)
+* Implement Shodan, BinaryEdge and GreyNoise support
+* Bug fixes and design changes
+* Vastly improve code structure, take more of a OOP approach
+* Improve false positive detection rate
+* Scrap redis, custom task management
+* Automatic database updating
+
+Open to additional feature requests.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
