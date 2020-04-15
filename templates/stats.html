@@ -1,0 +1,268 @@
+{% extends 'base.html' %}
+{% set active_page = "vulns" %}
+
+{% block head %}
+  <title>Flyby | Statistical Overview</title>
+{% endblock %}
+
+{% block body %}
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button></div>
+                </nav>
+                <div class="container-fluid">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-dark mb-0">{{stats['col']}} Statistical Overview</h3><a  data-placement="bottom" data-toggle="fileGen" title="Coming soon" data-content="Feature is coming soon . . ." class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</a></div>
+                    <div class="row">
+                      <div class="col-md-6 col-xl-3 mb-4">
+                          <div class="card shadow border-left-info py-2">
+                              <div class="card-body">
+                                  <div class="row align-items-center no-gutters">
+                                      <div class="col mr-2">
+                                          <div class="text-uppercase text-info font-weight-bold text-xs mb-1"><span>Total systems</span></div>
+                                          <div class="text-dark font-weight-bold h5 mb-0"><span>{{stats['tScanned']}}</span></div>
+                                      </div>
+                                      <div class="col-auto"><i class="fas fa-server fa-2x text-gray-300"></i></div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-left-success py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col mr-2">
+                                            <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Secure systems</span></div>
+                                            <div class="text-dark font-weight-bold h5 mb-0"><span>{{stats['sSystems']}}</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-shield-alt fa-0.5x text-gray-300"></i><i class="fas fa-server fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-left-danger py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col mr-2">
+                                            <div class="text-uppercase text-danger font-weight-bold text-xs mb-1"><span>Vulnerable Systems</span></div>
+                                            <div class="text-dark font-weight-bold h5 mb-0"><span>{{stats['tVulnerable']}}</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-bug fa-1.5x text-gray-300"></i><i class="fas fa-server fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-left-info py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col mr-2">
+                                            <div class="text-uppercase text-info font-weight-bold text-xs mb-1"><span>total services</span></div>
+                                            <div class="text-dark font-weight-bold h5 mb-0"><span>{{stats['tServices']}}</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-microchip fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-left-success py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col mr-2">
+                                            <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Secure Services</span></div>
+                                            <div class="text-dark font-weight-bold h5 mb-0"><span>{{stats['sServices']}}</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-shield-alt fa-1.5x text-gray-300"></i><i class="fas fa-microchip fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-left-danger py-2">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col mr-2">
+                                            <div class="text-uppercase text-danger font-weight-bold text-xs mb-1"><span>Vulnerable Services</span></div>
+                                            <div class="text-dark font-weight-bold h5 mb-0"><span>{{stats['tVulnerabilities']}}</span></div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-bug fa-1.5x text-gray-300"></i><i class="fas fa-microchip fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-5 col-xl-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h6 class="text-primary font-weight-bold m-0">System Stats</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div><canvas id="doughnutChart"</canvas></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-xl-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="text-primary font-weight-bold m-0">Service Stats</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div><canvas id="doughnutChart2"</canvas></div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+        <div class="row">
+                <div class="col-lg-7 col-xl-8">
+                    <div class="card shadow mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="text-primary font-weight-bold m-0">All Services</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div><canvas id="hotizontal" style="display: block; width: 1037px; height: 320px;" width="1037" height="320" class="chartjs-render-monitor"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          <div class="row">
+                  <div class="col-lg-7 col-xl-8">
+                      <div class="card shadow mb-4">
+                          <div class="card-header d-flex justify-content-between align-items-center">
+                              <h6 class="text-primary font-weight-bold m-0">Vulnerable Services</h6>
+                          </div>
+                          <div class="card-body">
+                              <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div><canvas id="hotizontalV" style="display: block; width: 1037px; height: 320px;" width="1037" height="320" class="chartjs-render-monitor"></canvas></div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+
+                  <script>
+                    $(document).ready(function(){
+                        $('[data-toggle="fileGen"]').popover();
+                    });
+                        // {"type":"doughnut","data":{"labels":["Direct","Social","Referral"],"datasets":[{"label":"","backgroundColor":["#4e73df","#1cc88a","#36b9cc"],"borderColor":["#ffffff","#ffffff","#ffffff"],"data":["50","30","15"]}]},"options":{"maintainAspectRatio":false,"legend":{"display":false},"title":{}}}
+                        //doughnut
+                            var ctxD = document.getElementById("doughnutChart").getContext('2d');
+                            var myLineChart = new Chart(ctxD, {
+                            type: 'doughnut',
+                            data: {
+                            labels: ["Secure", "Vulnerable"],
+                            datasets: [{
+                            data: [{{stats['sSystems']}}, {{stats['tVulnerable']}},],
+                            backgroundColor: ["#1cc88a", "#f6c23e"],
+                            }]
+                            },
+                            options: {
+                              maintainAspectRatio: false,
+                              responsive: true,
+                              legend: {
+                                position: 'bottom'
+                              }
+                            }
+                          });
+
+                          //doughnut
+                              var ctxD = document.getElementById("doughnutChart2").getContext('2d');
+                              var myLineChart = new Chart(ctxD, {
+                              type: 'doughnut',
+                              data: {
+                              labels: ["Secure", "Vulnerable"],
+                              datasets: [{
+                              data: [{{stats['sServices']}}, {{stats['tVulnerabilities']}},],
+                              backgroundColor: ["#1cc88a", "#f6c23e"],
+                              }]
+                              },
+                              options: {
+                                maintainAspectRatio: false,
+                                responsive: true,
+                                legend: {
+                                  position: 'bottom'
+                                }
+                              }
+                            });
+
+
+                            var ctxB = document.getElementById("hotizontal").getContext('2d');
+                            var myBarChart = new Chart(ctxB, {
+                              "type": "horizontalBar",
+                              "data": {
+                              "labels": ["FTP", "SSH", "HTTP", "HTTPS", "SMTP"],
+                              "datasets": [{
+                              "data": [{{stats['sepServices'][0]}}, {{stats['sepServices'][1]}}, {{stats['sepServices'][2]}}, {{stats['sepServices'][3]}}, {{stats['sepServices'][4]}}],
+                              "fill": false,
+                              "backgroundColor": ["rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)",
+                              "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)"
+                              ],
+                              "borderColor": ["rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)",
+                              "rgb(75, 192, 192)", "rgb(54, 162, 235)"
+                              ],
+                              "borderWidth": 1
+                              }]
+                              },
+                              "options": { legend: { display: false },
+                              "scales": {
+                              "xAxes": [{
+                              "ticks": {
+                              "beginAtZero": true
+                              }
+                              }]
+                              }
+                              }
+                              });
+
+                              //bar
+                              var ctxB = document.getElementById("hotizontalV").getContext('2d');
+                              var myBarChart = new Chart(ctxB, {
+                              type: 'bar',
+                              data: {
+                              labels: ["FTP", "SSH", "HTTP", "HTTPS", "SMTP"],
+                              datasets: [{
+                              data: [{{stats['vSepServices'][0]}}, {{stats['vSepServices'][1]}}, {{stats['vSepServices'][2]}}, {{stats['vSepServices'][3]}}, {{stats['vSepServices'][4]}}],
+                              backgroundColor: [
+                              'rgba(255, 99, 132, 0.2)',
+                              'rgba(54, 162, 235, 0.2)',
+                              'rgba(255, 206, 86, 0.2)',
+                              'rgba(75, 192, 192, 0.2)',
+                              'rgba(153, 102, 255, 0.2)',
+                              'rgba(255, 159, 64, 0.2)'
+                              ],
+                              borderColor: [
+                              'rgba(255,99,132,1)',
+                              'rgba(54, 162, 235, 1)',
+                              'rgba(255, 206, 86, 1)',
+                              'rgba(75, 192, 192, 1)',
+                              'rgba(153, 102, 255, 1)',
+                              'rgba(255, 159, 64, 1)'
+                              ],
+                              borderWidth: 1
+                              }]
+                              },
+                              options: { legend: { display: false },
+                              scales: {
+                              yAxes: [{
+                              ticks: {
+                              beginAtZero: true
+                              }
+                              }]
+                              }
+                              }
+                              });
+
+                        </script>
+
+{% endblock %}

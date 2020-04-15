@@ -1,0 +1,323 @@
+{% extends 'base.html' %}
+{% set active_page = "vulns" %}
+
+{% block head %}
+  <title>Flyby - Systems</title>
+{% endblock %}
+
+{% block body %}
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button></div>
+                </nav>
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4">Raw Information</h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 font-weight-bold"><strong>All System Data</strong><br></p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" id="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
+                                </div>
+                            </div>
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                <table class="table dataTable my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Host</th>
+                                            <th>Detected Service(s)</th>
+                                            <th>Detection Probability</th>
+                                            <th>Vulnerable Service(s)</th>
+                                            <th>Severity</th>
+                                            <th>Attack Vector</th>
+                                            <th>Scan Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      {% for system in systems %}
+                                        <tr>
+                                            <td><i class="fas fa-server" style="margin: 0px 8px 0px 0px;"></i>{{ system.ip }}</td>
+                                            <td>
+                                            {% if system.ftp %}
+                                              <strong>FTP: </strong>
+                                              {{ system.ftp }}
+                                              <br>
+                                            {% endif %}
+
+                                            {% if system.ssh %}
+                                              <strong>SSH: </strong>
+                                              {{ system.ssh }}
+                                              <br>
+                                            {% endif %}
+
+                                            {% if system.http %}
+                                            <strong>HTTP: </strong>
+                                              {{ system.http }}
+                                              <br>
+                                            {% endif %}
+
+                                            {% if system.https %}
+                                            <strong>HTTPS: </strong>
+                                              {{ system.https }}
+                                              <br>
+                                            {% endif %}
+
+                                            {% if system.smtp %}
+                                            <strong>SMTP: </strong>
+                                              {{ system.smtp }}
+                                              <br>
+                                            {% endif %}
+                                            </td>
+
+                                            <td>
+                                                {% if system.ftp_cves_scan_stats %}
+                                                  {{  system.ftp_cves_scan_stats['match'] }}%
+                                                  <br>
+                                                {% endif %}
+
+                                                {% if system.ssh_cves_scan_stats %}
+                                                  {{  system.ssh_cves_scan_stats['match'] }}%
+                                                  <br>
+                                                {% endif %}
+
+                                                {% if system.http_cves_scan_stats %}
+                                                  {{  system.http_cves_scan_stats['match'] }}%
+                                                  <br>
+                                                {% endif %}
+                                                {% if system.https_cves_scan_stats %}
+                                                  {{  system.https_cves_scan_stats['match'] }}%
+                                                  <br>
+                                                {% endif %}
+
+                                                {% if system.smtp_cves_scan_stats %}
+                                                  {{  system.smtp_cves_scan_stats['match'] }}%
+                                                  <br>
+                                                {% endif %}
+                                              </td>
+
+                                            <td>
+                                              {% if system.ftp_cves or system.ssh_cves or system.http_cves or system.https_cves or system.smtp_cves %}
+                                                <span style="color:#e74a3b; font-weight: bold;">Detected</span>
+                                                <br>
+                                                  {% if system.http_cves %}
+                                                  <strong>HTTP Service ({{system.http}})</strong>
+                                                  <br>
+                                                    {% for cve in system.http_cves %}
+                                                      <a href="https://nvd.nist.gov/vuln/detail/{{cve['cves']}}">{{cve['cves']}}</a><br>
+                                                    {% endfor %}
+                                                    <br>
+                                                  {% endif %}
+
+                                                  {% if system.https_cves %}
+                                                  <strong>HTTPS Service ({{system.https}})</strong>
+                                                  <br>
+                                                    {% for cve in system.https_cves %}
+                                                      <a href="https://nvd.nist.gov/vuln/detail/{{cve['cves']}}">{{cve['cves']}}</a><br>
+                                                    {% endfor %}
+                                                    <br>
+                                                  {% endif %}
+
+                                                  {% if system.ftp_cves %}
+                                                  <strong>FTP Service ({{system.ftp}})</strong>
+                                                  <br>
+                                                    {% for cve in system.ftp_cves %}
+                                                      <a href="https://nvd.nist.gov/vuln/detail/{{cve['cves']}}">{{cve['cves']}}</a><br>
+                                                    {% endfor %}
+                                                    <br>
+                                                  {% endif %}
+
+                                                  {% if system.ssh_cves %}
+                                                  <strong>SSH Service ({{system.ssh}})</strong>
+                                                  <br>
+                                                    {% for cve in system.ssh_cves %}
+                                                      <a href="https://nvd.nist.gov/vuln/detail/{{cve['cves']}}">{{cve['cves']}}</a><br>
+                                                    {% endfor %}
+                                                    <br>
+                                                  {% endif %}
+
+                                                  {% if system.smtp_cves %}
+                                                  <strong>SMTP Service ({{system.smtp}})</strong>
+                                                  <br>
+                                                    {% for cve in system.smtp_cves %}
+                                                      <a href="https://nvd.nist.gov/vuln/detail/{{cve['cves']}}">{{cve['cves']}}</a><br>
+                                                    {% endfor %}
+                                                    <br>
+                                                  {% endif %}
+                                              {% else %}
+                                                {% if system.scan_stats %}
+                                                  <span style="color:#4e73df; font-weight: bold;">{{system.scan_stats['result']}}</span>
+                                                {% endif %}
+                                              {% endif %}
+                                            </td>
+
+                                            <td>
+                                              {% if system.ftp_cves or system.ssh_cves or system.http_cves or system.https_cves or system.smtp_cves %}
+                                                <br>
+                                                  {% if system.http_cves %}
+                                                  <br>
+                                                    {% for cve in system.http_cves %}
+                                                      {{cve['cvss2']}}<br>
+                                                    {% endfor %}
+                                                    <br>
+                                                  {% endif %}
+
+                                                  {% if system.https_cves %}
+                                                  <br>
+                                                    {% for cve in system.https_cves %}
+                                                      {{cve['cvss2']}}<br>
+                                                    {% endfor %}
+                                                    <br>
+                                                  {% endif %}
+
+                                                  {% if system.ftp_cves %}
+                                                  <br>
+                                                    {% for cve in system.ftp_cves %}
+                                                      {{cve['cvss2']}}<br>
+                                                    {% endfor %}
+                                                    <br>
+                                                  {% endif %}
+
+                                                  {% if system.ssh_cves %}
+                                                  <br>
+                                                    {% for cve in system.ssh_cves %}
+                                                      {{cve['cvss2']}}<br>
+                                                    {% endfor %}
+                                                    <br>
+                                                  {% endif %}
+
+                                                  {% if system.smtp_cves %}
+                                                  <br>
+                                                    {% for cve in system.smtp_cves %}
+                                                      {{cve['cvss2']}}<br>
+                                                    {% endfor %}
+                                                    <br>
+                                                  {% endif %}
+                                              {% endif %}
+                                              </td>
+
+                                            <td>
+                                              {% if system.ftp_cves or system.ssh_cves or system.http_cves or system.https_cves or system.smtp_cves %}
+                                                <br>
+                                                  {% if system.http_cves %}
+                                                  <br>
+                                                    {% for cve in system.http_cves %}
+                                                      {{cve['aVector']}}<br>
+                                                    {% endfor %}
+                                                    <br>
+                                                  {% endif %}
+
+                                                  {% if system.https_cves %}
+                                                  <br>
+                                                    {% for cve in system.https_cves %}
+                                                      {{cve['aVector']}}<br>
+                                                    {% endfor %}
+                                                    <br>
+                                                  {% endif %}
+
+                                                  {% if system.ftp_cves %}
+                                                  <br>
+                                                    {% for cve in system.ftp_cves %}
+                                                      {{cve['aVector']}}<br>
+                                                    {% endfor %}
+                                                    <br>
+                                                  {% endif %}
+
+                                                  {% if system.ssh_cves %}
+                                                  <br>
+                                                    {% for cve in system.ssh_cves %}
+                                                      {{cve['aVector']}}<br>
+                                                    {% endfor %}
+                                                    <br>
+                                                  {% endif %}
+
+                                                  {% if system.smtp_cves %}
+                                                  <br>
+                                                    {% for cve in system.smtp_cves %}
+                                                      {{cve['aVector']}}<br>
+                                                    {% endfor %}
+                                                    <br>
+                                                  {% endif %}
+                                              {% endif %}
+                                              </td>
+
+                                              <td>
+                                                {% if system.scanStats %}
+                                                  {{  system.scanStats['state'] }}
+                                                  <br>
+                                                  {{  system.scanStats['dTime'] }}
+                                                  <hr>
+                                                {% endif %}
+
+                                                {% if system.ftp_cves_scan_stats %}
+                                                  {{  system.ftp_cves_scan_stats['state'] }}
+                                                  <br>
+                                                  {{  system.ftp_cves_scan_stats['dTime'] }}
+                                                  <hr>
+                                                {% endif %}
+
+                                                {% if system.ssh_cves_scan_stats %}
+                                                  {{  system.ssh_cves_scan_stats['state'] }}
+                                                  <br>
+                                                  {{  system.ssh_cves_scan_stats['dTime'] }}
+                                                  <hr>
+                                                {% endif %}
+
+                                                {% if system.http_cves_scan_stats %}
+                                                  {{  system.http_cves_scan_stats['state'] }}
+                                                  <br>
+                                                  {{  system.http_cves_scan_stats['dTime'] }}
+                                                  <hr>
+                                                {% endif %}
+
+                                                {% if system.https_cves_scan_stats %}
+                                                  {{  system.https_cves_scan_stats['state'] }}
+                                                  <br>
+                                                  {{  system.https_cves_scan_stats['dTime'] }}
+                                                  <hr>
+                                                {% endif %}
+
+                                                {% if system.snmp_cves_scan_stats %}
+                                                  {{  system.snmp_cves_scan_stats['state'] }}
+                                                  <br>
+                                                  {{  system.snmp_cves_scan_stats['dTime'] }}
+                                                  <hr>
+                                                {% endif %}
+
+
+                                                </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr></tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+            $(document).ready(function(){
+              $("#search").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#dataTable tr").filter(function() {
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+              });
+            });
+            </script>
+
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Flyby 2020</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% set active_page = "scan" %}
+
+{% block head %}
+  <title>Flyby - Systems</title>
+{% endblock %}
+
+{% block body %}
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button></div>
+                </nav>
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4">Network Scan</h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 font-weight-bold"><strong>Scanning Settings</strong><br></p>
+                        </div>
+                        <div class="card-body">
+
+
+                          <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                              <table class="table dataTable my-0" id="dataTable">
+                                  <thead>
+                                      <tr>
+                                          <th>Address Range</th>
+                                          <th>APIs</th>
+                                          <th>Options</th>
+                                          <th>Scan</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    <form action="/censys" method="POST">
+                                    <td>
+                                        <label>
+                                          <input value="" name="search" type="text" class="form-control form-control-sm" aria-controls="dataTable" placeholder="IP Range" required>
+                                        </label>
+                                    </td>
+                                    <td>
+                                    <div class="custom-control custom-checkbox">
+                                      <input class="custom-control-input" type="checkbox" value="censysAPI" name="censysAPI" id="censysAPI" checked required>
+                                      <label class="custom-control-label" for="censysAPI">Censys</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                      <input class="custom-control-input" type="checkbox" value="shodanAPI" name="shodanAPI" id="shodanAPI" disabled>
+                                      <label class="custom-control-label" for="shodanAPI">Shodan</label>
+                                    </div>
+                                  </td>
+
+                                  <td>
+                                    <div class="custom-control custom-checkbox">
+                                      <input class="custom-control-input" type="checkbox" value="http" name="httpService" id="httpService" checked>
+                                      <label class="custom-control-label" for="httpService">HTTP</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                      <input class="custom-control-input" type="checkbox" value="https" name="httpsService" id="httpsService">
+                                      <label class="custom-control-label" for="httpsService">HTTPS</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                      <input class="custom-control-input" type="checkbox" value="ftp" name="ftpService" id="ftpService">
+                                      <label class="custom-control-label" for="ftpService">FTP</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                      <input class="custom-control-input" type="checkbox" value="ssh" name="sshService" id="sshService">
+                                      <label class="custom-control-label" for="sshService">SSH</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                      <input class="custom-control-input" type="checkbox" value="smtp" name="smtpService" id="smtpService">
+                                      <label class="custom-control-label" for="smtpService">SMTP</label>
+                                    </div>
+                                  </td>
+                                    <td>
+                                      <button class="btn btn-primary btn-sm d-none d-sm-inline-block" type="submit">
+                                          <i class="fas fa-play fa-2x text-gray-300"></i>
+                                      </button>
+                                    </form>
+                                    </td>
+                                  </tbody>
+                                  <tfoot>
+                                      <tr></tr>
+                                  </tfoot>
+                              </table>
+                            <td>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Flyby 2020</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+{% endblock %}

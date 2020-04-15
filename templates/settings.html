@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% set active_page = "settings" %}
+
+{% block head %}
+<title>Flyby - Settings</title>
+{% endblock %}
+
+{% block body %}
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button></div>
+                </nav>
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4">Settings</h3>
+                    <div class="row mb-3">
+                        <div class="col-lg-8">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card shadow mb-3">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 font-weight-bold">Censys</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <form action="/settings/censys" method="POST">
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="uid"><strong>UID</strong></label><input class="form-control" type="text" placeholder="UID" value="{{settings[0]}}" name="uid" required></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <div class="form-group"><label for="secret"><strong>SECRET</strong></label><input class="form-control" type="text" placeholder="Secret Key" value="{{settings[1]}}" name="secret" required></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="card shadow">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 font-weight-bold">Database</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <form action="/settings/cpedb" method="POST">
+                                                <div class="form-group">{%if cpe %} <button class="btn btn-primary btn-sm" type="submit">Update Local CPE DB</button> {% else %}<button class="btn btn-primary btn-sm" type="submit">Create Local CPE DB</button>{% endif %}</div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                          <div class="card shadow mb-4">
+                              <div class="card-header py-3">
+                                  <h6 class="text-primary font-weight-bold m-0">Status</h6>
+                              </div>
+                              <div class="card-body">
+                                  <h4 class="small font-weight-bold">CENSYS API
+                                  {%if censysInfo %}
+                                  <span class="float-right" style="color:#1cc88a">Online</span></h4>
+                                  <h6>Usage: {{censysInfo['quota']['used']}} / {{censysInfo['quota']['allowance']}}</h6>
+                                  <h6>Resets: {{censysInfo['quota']['resets_at']}}</h6>
+                                  {% else %}
+                                  <span class="float-right" style="color:#e74a3b">Offline</span></h4>
+                                  {% endif %}
+                                  <hr>
+                                  <h4 class="small font-weight-bold">CVEDB {%if cve %}<span class="float-right" style="color:#1cc88a">Available {% else %}<span class="float-right" style="color:#e74a3b">Unavailable {% endif %}</span></h4>
+                                  <h4 class="small font-weight-bold">Local CPE DB {%if cpe %}<span class="float-right" style="color:#1cc88a">Available {% else %}<span class="float-right" style="color:#e74a3b">Unavailable {% endif %}</span></h4>
+                              </div>
+
+                          </div>
+
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Flyby 2020</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+{% endblock %}

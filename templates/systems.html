@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% set active_page = "systems" %}
+
+{% block head %}
+  <title>Flyby - Systems</title>
+{% endblock %}
+
+{% block body %}
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button></div>
+                </nav>
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4">All IP Ranges</h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 font-weight-bold"><strong>All System Data</strong><br></p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" id="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
+                                </div>
+                            </div>
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                <table class="table dataTable my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>IP Address Range</th>
+                                            <th>Total Systems</th>
+                                            <th>Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      {% for system in systems %}
+                                        <tr>
+                                            <td><i class="fas fa-server" style="margin: 0px 8px 0px 0px;"></i>{{ system }}</td>
+                                            <td>{{ total[system] }}</td>
+                                            <td>
+                                              <form action="/data/{{ system }}" method="GET">
+                                                   <button class="btn btn-primary btn-sm d-none d-sm-inline-block"  style="background-color: #4CAF50; border: #4CAF50" type="submit" >Show All</button>
+                                              </form>
+                                              <br>
+                                              <form action="/scan/{{ system }}" method="GET">
+                                                   <button class="btn btn-primary btn-sm d-none d-sm-inline-block" type="submit" style="background-color: #008CBA; border: #008CBA" >Run Vulnerability Scan</button>
+                                              </form>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr></tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+            $(document).ready(function(){
+              $("#search").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#dataTable tr").filter(function() {
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+              });
+            });
+            </script>
+
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Flyby 2020</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+{% endblock %}

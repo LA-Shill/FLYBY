@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<html lang="en" dir="ltr">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      {% block head %} {% endblock %}
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+  </head>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='js/bs-init.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+  <body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-fighter-jet"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>Flyby</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item" role="presentation"><a class="nav-link {{ 'active' if active_page == 'index' else '' }}" href="/"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link {{ 'active' if active_page == 'scan' else '' }}" href="/scan"><i class="fas fa-fingerprint"></i><span>Scan</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link {{ 'active' if active_page == 'systems' else '' }}" href="/data"><i class="fas fa-database"></i><span>Systems</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link {{ 'active' if active_page == 'vulns' else '' }}" href="/vulns"><i class="fas fa-table"></i><span>Results</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link {{ 'active' if active_page == 'settings' else '' }}" href="/settings"><i class="material-icons">settings</i><span>Settings</span></a></li>
+                </ul>
+            </div>
+        </nav>
+      {% block body %} {% endblock %}
+  </body>
+</html>
