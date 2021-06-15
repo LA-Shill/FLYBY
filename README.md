@@ -1,4 +1,5 @@
 <h1 align="center">FLYBY🛩️</h1>
+<h6 align="center" style="color:red">ABANDONED - This project is no longer actively maintained. Check out the improved <a href="https://github.com/LA-Shill/Informant">Informant tool.</a></h6>
 <h4 align="center">Passive Reconnaissance and Vulnerability Assessment Platform</h1>
 <p align="center">
   <a href="https://github.com/LA-Shill/FLYBY/blob/master/LICENSE">
