@@ -14,7 +14,7 @@
     <img src="https://i.ibb.co/8KSQSK0/flyby.png" alt="FLYBY">
   </a>
   <p align="center">
-    FLYBY is a open source web based passive reconnaissance and vulnerability assessment platform which utilises scan data from the <a href="https://censys.io/">Censys</a> network to identify known vulnerabilities. All vulnerability data is pulled from the <a href="https://nvd.nist.gov/">National Vulnerability Database (NVD)</a> which is maintained by the U.S. government.
+    FLYBY is a open source web based passive reconnaissance and vulnerability assessment platform which utilises scan data from the <a href="https://www.criminalip.io/">Criminalip</a>, <a href="https://censys.io/">Censys</a> network to identify known vulnerabilities. All vulnerability data is pulled from the <a href="https://nvd.nist.gov/">National Vulnerability Database (NVD)</a> which is maintained by the U.S. government.
     </p>
     <p align="center">
       The FLYBY platform has been developed as part of my penultimate year Ethical Hacking mini-project at Abertay University.
@@ -34,7 +34,7 @@
 
 ## Getting Started
 <p align="center">
-FLYBY comes as both a standalone <strike>command line</strike> application as well as a web based application. The application relies on numerous dependencies and requires a valid <a href="https://censys.io/api">Censys</a> account API key.
+FLYBY comes as both a standalone <strike>command line</strike> application as well as a web based application. The application relies on numerous dependencies and requires a valid <a href="https://www.criminalip.io/">Criminalip</a>, <a href="https://censys.io/api">Censys</a> account API key.
 </p>
 
 ### Dependencies
@@ -45,6 +45,7 @@ FLYBY comes as both a standalone <strike>command line</strike> application as we
 * Pip3
   * Flask
   * Flask-PyMongo
+  * Criminalip
   * Censys
   * Fuzzywuzzy
   * PyMongo
