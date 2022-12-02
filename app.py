@@ -31,7 +31,7 @@ def censysScan():
     # Add IPv4 + CIDR Validation + Serverside required check
     ipRange = request.form.get("search")
 
-    apis = [request.form.get('censysAPI'), request.form.get('shodanAPI')]
+    apis = [request.form.get('criminalipAPI'), request.form.get('censysAPI'), request.form.get('shodanAPI')]
     options = [request.form.get('httpService'), request.form.get('httpsService'), request.form.get('ftpService'), request.form.get('sshService'), request.form.get('smtpService')]
     ip = re.sub(r'[/]', "_", ipRange)
     colNames = mongo.db.list_collection_names()
